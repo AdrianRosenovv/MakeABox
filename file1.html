@@ -1,0 +1,89 @@
+<html>
+<head>
+<style>
+	#line
+	{
+		background-color:black;
+		position:absolute;
+		height:2px;
+	}
+    #line2
+	{
+		background-color:black;
+		position:absolute;
+		height:2px;
+	}
+    #line3
+	{
+		background-color:black;
+		position:absolute;
+		height:2px;
+	}
+    #line4
+	{
+		background-color:black;
+		position:absolute;
+		height:2px;
+	}
+</style>
+<script>
+function createLine(x1,y1,x2,y2,lineId)
+{
+	// absoluteX = Math.abs(x2-x1);
+	// absoluteY = Math.abs(y1-y2);
+	// distance = absoluteX + absoluteY; 
+	
+	//Both ways working the same way
+
+	distance = Math.sqrt(((x1-x2)*(x1-x2))+((y1-y2)*(y1-y2)));
+
+	xMid = (x1+x2)/2
+	yMid = (y1+y2)/2
+	
+	salopeInRadian = Math.atan2(y1 - y2, x1 - x2);
+	salopeInDegrees =  (salopeInRadian * 180) / Math.PI; 
+	
+	line = document.getElementById(lineId)
+	line.style.width = distance
+	line.style.top = yMid
+	line.style.left = xMid
+	line.style.transform = "rotate("+salopeInDegrees+"deg)"; 
+}
+function craeteSquare (size)
+{
+	createLine(1*size, 1*size, 10*size, 1*size, "line")
+    createLine(1*size, 1*size, 1*size, 10*size, "line2")
+    createLine(1*size, 10*size, 10*size, 10*size, "line3")
+    createLine(10*size, 10*size, 10*size, 1*size, "line4")
+}
+</script>
+</head>
+<body>
+
+<div>
+	
+	<input id="number" type="text" >
+
+</div>
+
+<div>
+    
+    <div id='line'></div>
+    <div id='line2'></div>
+    <div id='line3'></div>
+    <div id='line4'></div>
+
+</div>
+
+	<script>
+		function drawSquare()
+		{
+		var text = document.getElementById("number").value;
+		var size = parseInt(text);
+		craeteSquare(size)
+		}
+    </script>
+    <button onclick="drawSquare()">Click me</button>
+
+</body>
+</html>
